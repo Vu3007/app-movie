@@ -1,9 +1,5 @@
 package com.example.movieapp.service;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f26bf26f2b3ddaf48ba9fdfef84ec05492b9ebee
 import com.example.movieapp.entity.Movie;
 import com.example.movieapp.entity.Review;
 import com.example.movieapp.entity.User;
@@ -88,8 +84,5 @@ public class ReviewService {
 
         reviewRepository.delete(review);
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> f26bf26f2b3ddaf48ba9fdfef84ec05492b9ebee

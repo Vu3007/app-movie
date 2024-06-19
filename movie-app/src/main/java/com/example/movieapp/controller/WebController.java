@@ -2,13 +2,18 @@ package com.example.movieapp.controller;
 
 import com.example.movieapp.entity.*;
 import com.example.movieapp.model.enums.MovieType;
-import com.example.movieapp.service.*;
+import com.example.movieapp.service.EpisodeService;
+import com.example.movieapp.service.FavoriteService;
+import com.example.movieapp.service.ReviewService;
+import com.example.movieapp.service.WebService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,6 +25,7 @@ public class WebController {
     private final ReviewService reviewService;
     private final FavoriteService favoriteService;
     private final HttpSession session;
+
     @GetMapping
     public String getHomePage(Model model) {
         List<Movie> dsPhimHot = webService.getHotMovie();
@@ -55,14 +61,6 @@ public class WebController {
         model.addAttribute("currentPage", page);
         return "web/phim-le";
     }
-    @GetMapping("/dang-nhap")
-    public String getLoginPage() {
-        return "web/dang-nhap";
-    }
-//    @GetMapping("/dang-ky")
-//    public String getDangKy(Model model) {
-//        return "web/dang-ky";
-//    }
 
     @GetMapping("/phim-chieu-rap")
     public String getPhimChieuRapPage(Model model,
@@ -99,13 +97,6 @@ public class WebController {
         model.addAttribute("episodes", episodes);
         return "web/chi-tiet-phim";
     }
-<<<<<<< HEAD
-    @GetMapping("/xem-phim/{id}/{slug}")
-    public String getMovieStreamingDetailPage(@PathVariable Integer id,
-                                              @PathVariable String slug,
-                                              @RequestParam String tap,
-                                              Model model) {
-=======
 
     // http://localhost:8080/xem-phim/99/the-torment-of-others?tap=full
     // http://localhost:8080/xem-phim/99/the-torment-of-others?tap=1
@@ -114,7 +105,6 @@ public class WebController {
                                                @PathVariable String slug,
                                                @RequestParam String tap,
                                                Model model) {
->>>>>>> f26bf26f2b3ddaf48ba9fdfef84ec05492b9ebee
         // Trả về thông tin phim
         Movie movie = webService.getMovieDetails(id, slug);
 
@@ -126,25 +116,14 @@ public class WebController {
 
         // Trả về danh sách review
         List<Review> reviews = reviewService.getReviewsByMovie(id);
-<<<<<<< HEAD
-        //Lấy ra thông tin tập phim cần xem
-        Episode currentEpisode=episodeService.getEpisodeByDisplayOrder(id,tap);
-=======
 
         // Lấy ra thông tin tập phim cần xem (tap : displayOrder)
         Episode currentEpisode = episodeService.getEpisodeByDisplayOrder(id, tap);
->>>>>>> f26bf26f2b3ddaf48ba9fdfef84ec05492b9ebee
 
         model.addAttribute("movie", movie);
         model.addAttribute("relatedMovies", relatedMovies);
         model.addAttribute("reviews", reviews);
         model.addAttribute("episodes", episodes);
-<<<<<<< HEAD
-        model.addAttribute("currentEpisode",currentEpisode);
-        return "web/xem-phim";
-    }
-}
-=======
         model.addAttribute("currentEpisode", currentEpisode);
         return "web/xem-phim";
     }
@@ -160,7 +139,6 @@ public class WebController {
     public String getLoginPage() {
         return "web/dang-nhap";
     }
-
 
     @GetMapping("/thong-tin-ca-nhan")
     public String getProfilePage(Model model) {
@@ -180,6 +158,4 @@ public class WebController {
     public String getDetailUserPage() {
         return "admin/user/detail";
     }
-
 }
->>>>>>> f26bf26f2b3ddaf48ba9fdfef84ec05492b9ebee

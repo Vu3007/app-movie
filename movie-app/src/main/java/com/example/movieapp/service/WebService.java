@@ -20,11 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WebService {
     private final MovieRepository movieRepository;
-<<<<<<< HEAD
+
     private final UserRepository userRepository;
-=======
+
     private final EpisodeRepository episodeRepository;
->>>>>>> 5ca0e6c9ec4499f555668404fb6c6f118afc1c0d
+
 
     public Page<Movie> findByType(MovieType type, Boolean status, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page - 1, limit, Sort.by("publishedAt").descending());
@@ -44,12 +44,10 @@ public class WebService {
                 .findTop6ByTypeAndStatusAndIdNotOrderByRatingDesc(movie.getType(), true, movie.getId());
     }
 
-<<<<<<< HEAD
     public Object getInformationUser(Integer id) {
         return userRepository.findById(id).orElse(null);
     }
 
 
-=======
->>>>>>> 5ca0e6c9ec4499f555668404fb6c6f118afc1c0d
+
 }
